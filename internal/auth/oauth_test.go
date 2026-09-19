@@ -76,8 +76,8 @@ func TestHandleGoogleCallbackExistingUser(t *testing.T) {
 	recorder := httptest.NewRecorder()
 	manager.HandleGoogleCallback(recorder, oauthRequest(server))
 
-	if recorder.Code != http.StatusTemporaryRedirect || recorder.Header().Get("Location") != "/" {
-		t.Fatalf("callback response = %d %q, want redirect to /", recorder.Code, recorder.Header().Get("Location"))
+	if recorder.Code != http.StatusTemporaryRedirect || recorder.Header().Get("Location") != "/auth" {
+		t.Fatalf("callback response = %d %q, want redirect to /auth", recorder.Code, recorder.Header().Get("Location"))
 	}
 	cookies := recorder.Result().Cookies()
 	if len(cookies) != 1 || cookies[0].Name != "session_token" || cookies[0].Value != "drn_existing" {
