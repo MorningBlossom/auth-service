@@ -106,5 +106,5 @@ func (o *OAuthManager) HandleGoogleCallback(w http.ResponseWriter, r *http.Reque
 	})
 
 	// Redirect back to frontend dashboard
-	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+	http.Redirect(w, r, "/auth", http.StatusTemporaryRedirect)
 }
