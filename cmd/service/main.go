@@ -60,7 +60,7 @@ func main() {
 	srv.AddTransport(transport.GET{})
 	srv.Use(extension.Introspection{})
 
-	mux.Handle("/", playground.Handler("GraphQL Playground", "/query"))
+	mux.Handle("/auth", playground.Handler("GraphQL Playground", "/query"))
 	mux.Handle("/query", middleware.CookieAuthMiddleware(srv))
 
 	log.Printf("Starting server on port %s", port)
