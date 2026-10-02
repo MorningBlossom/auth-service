@@ -72,6 +72,11 @@ func (o *OAuthManager) HandleGoogleCallback(w http.ResponseWriter, r *http.Reque
 		_ = resp.Body.Close()
 	}()
 
+	if resp.StatusCode != http.StatusOK {
+		http.Error(w, "Failed to fetch user info", http.StatusInternalServerError)
+		return
+	}
+
 	var gUser GoogleUser
 	if err := json.NewDecoder(resp.Body).Decode(&gUser); err != nil {
 		http.Error(w, "Failed to parse user profile", http.StatusInternalServerError)
